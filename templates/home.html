@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang = "en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name = "viewport"
+      content = "width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+    />
+    <title> Microblog </title>
+    <!-- 'rel' stands for relationship-->
+    <link rel="stylesheet" href="\static\css\styles.css" />
+  </head>
+  <body>
+    <header class="navbar">
+        <div class="navbar__brand">
+            <img class="navbar__logo" src="\static\microblog-logo.svg" alt="The logo of Microblog"/> Microblog
+        </div>
+        <ul class="navbar__navigation">
+            <li class="navbar__navigation-item"> <a class="navbar__link" href="#"> Recent </a></li>
+            <li class="navbar__navigation-item"> <a class="navbar__link" href="#"> Calendar </a></li>
+        </ul>
+    </header>
+    <main class="main">
+        <section>
+            <h1> Add new entry </h1>
+            <form class="form" method="POST">
+                <p class="form__input">
+                    <label class="form__label" for="entry"> Entry contents: </label>
+                    <textarea class="form__textarea" name="content" id="entry"></textarea>
+                </p>
+                <button class="form__submit" type="submit"> Add Entry </button>
+            </form>
+            <!-- label and input are usually grouped together, is why we put them in a paragraph. -->
+        </section>
+        <section>
+            <h1> Recent posts </h1>
+            {% for entry in entries %}
+            <article class="entry">
+                <div>
+                    <!-- Instead of printing the title we'll put the first caracters of the content-->
+                    <!-- {{entry[0] | truncate(30, true)}} is going to run the truncate filter on the entry contents. -->
+                    <h2 class="entry__title"> {{entry[0] | truncate(30, true)}} </h2>
+                    <time class="entry__date" datetime= "{{ entry[2] }}" >★ {{ entry[2] }} </time>
+                </div>
+                <p class="entry__content">
+                    <!--entry[0] is going to give us the entry content.-->
+                    {{ entry[0] }}
+                </p>
+            </article>
+            {% endfor %}
+        </section>
+    </main>
+    <footer class="footer">
+        <div class="footer__content">
+            <section class="left">
+                <a class="footer__item" href=""> Made by Ibrahim DIARRA</a>
+                <a class="footer__item" href=""> Check out my projects</a>
+            </section>
+            <section class="right">
+                <div class="footer__column">
+                    <a class="footer__item" href=""> Recent </a>
+                    <a class="footer__item" href=""> Calendar </a>
+                </div>
+                <div class="footer__column">
+                    <a class="footer__item" href=""> About </a>
+                    <a class="footer__item" href=""> How this was made </a>
+                </div>
+            </section>
+        </div>
+    </footer>
+  </body>
+</html>
