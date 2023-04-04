@@ -9,7 +9,7 @@ load_dotenv()
 def create_app():
     app = Flask(__name__)
     # Create a client
-    client = MongoClient(os.getenv("MONGODB_URI")) 
+    client = MongoClient(os.getenv("MONGODB_URI"), tlsCAFile=certifi.where()) 
     # Connecting the client to a db (microblog db created in our claster) and put the db value inside the app
     app.db = client.microblog
     
